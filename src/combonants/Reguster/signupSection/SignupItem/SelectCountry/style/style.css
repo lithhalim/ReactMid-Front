@@ -1,0 +1,36 @@
+@use "../../../../../main-style/style.scss";
+.container-currency-section-have {
+  width: 100%;
+  border: 1px solid silver;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  height: 37px;
+  margin-top: 15px;
+}
+
+.container-currency-section-have img {
+  width: 40px;
+  height: 30px;
+  margin-top: 1px;
+  border-radius: 5px;
+}
+
+.container-currency-section-have select {
+  border: none;
+  width: 73.5%;
+  position: absolute;
+  font-weight: bold;
+  height: 32px;
+  font-size: .9em;
+  text-align: center;
+  text-transform: capitalize;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.container-currency-section-have select option {
+  font-size: .9em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+/*# sourceMappingURL=style.css.map */
