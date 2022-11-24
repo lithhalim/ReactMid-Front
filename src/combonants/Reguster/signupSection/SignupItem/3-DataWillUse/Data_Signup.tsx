@@ -42,6 +42,6 @@ const Data_Signup_Use=[
 
 export {
     SignupSchema as SchemaSignup,
-    initialValues as InitialData,
-    Data_Signup_Use as DatauseSign
+    initialValues as InitialDataSignup,
+    Data_Signup_Use as Data_Signup_Use
 }

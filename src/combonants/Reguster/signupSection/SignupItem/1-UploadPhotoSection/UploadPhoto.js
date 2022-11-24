@@ -35,8 +35,8 @@ function UploadPhoto({GetPhoto}) {
             Upload Image <span style={{fontSize:"1.2em",marginLeft:"4px",marginTop:"4px"}}><MdOutlineAddAPhoto/></span>
             <input hidden accept="image/*" multiple type="file" name="imagesection" onChange={getImage_file} />
         </Button>
-        <div className='container-image-upload'>
-            {ImageUpload?<img src={ImageUpload.url} alt="" />:<></>}
+        <div className='container-image-upload' >
+            {ImageUpload?<img style={{width:"50px",height:"50px"}}  src={ImageUpload.url} alt="" />:<></>}
         </div>
                      
     </div>

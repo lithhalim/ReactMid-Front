@@ -11,6 +11,7 @@ import CatagoryColumn from './ColumnTaable/2-CatagoryColumn';
 import DeleteColumn from './ColumnTaable/3-deleteColumn';
 import UpdateColumn from './ColumnTaable/4-UpdateColumn';
 import UsePosts from './FetchDataItem';
+import Loding_Page from '../../../loading/Loding-Page';
 
 
 
@@ -20,6 +21,10 @@ function Table_Get_Data_AllUser({SearchData}) {
     const Login_Create_ContextAuth=useContext(Login_Create_Context);
 
     const {  data,isLoading } = UsePosts(Login_Create_ContextAuth);
+
+    if(isLoading){
+      return(<Loding_Page/>)
+    }
 
 
 
@@ -44,8 +49,8 @@ function Table_Get_Data_AllUser({SearchData}) {
     
       //To get All Data I Have
       const rows =data?data?.
-      filter((data)=>(data.firstName.toLowerCase()
-      .startsWith(SearchData))):<></>
+      filter((data)=>((data.firstName.toLowerCase()
+      .startsWith(SearchData)))&&(data.regusterid!==Login_Create_ContextAuth.AllUserDaata.regusterid)):<></>
     
     
     

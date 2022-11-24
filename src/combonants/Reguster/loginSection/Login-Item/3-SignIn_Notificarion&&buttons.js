@@ -1,7 +1,6 @@
 import React from 'react';
 import {motion} from "framer-motion";
 
-import {BsFacebook,BsGithub,BsTwitter} from "react-icons/bs"
 import { useNavigate } from 'react-router-dom';
 
 function SignIn_Notificarion({statusEmail}) {

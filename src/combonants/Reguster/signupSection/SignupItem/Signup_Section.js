@@ -1,56 +1,59 @@
-import React, {  useState } from 'react';
-import axios from 'axios';
+import React, {  useState ,useContext} from 'react';
 import {motion} from "framer-motion"
-import uuid from 'react-uuid';
 
+import PostData_Reguster from './4-ApiSection/Function_PostData';
 
 //Formik Input Section Added
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 //Combonants Import Section 
-import SignUp_Notificarion from './3-Signup_Notificarion&&buttons';
-import {SchemaSignup,InitialData,DatauseSign} from "../SignupItem/Data_Signup"
+import SignUp_Notificarion from './6-SubmitAndNotification/3-Signup_Notificarion&&buttons';
 
 import "../style/style.scss";
-import UploadPhoto from './AllOther_Filed/UploadPhoto';
+import UploadPhoto from './1-UploadPhotoSection/UploadPhoto';
 import Select_Currency from './SelectCountry/SelectVuntry';
+import SignupButton from './5-Signup_Button/SignupButton';
+import { Login_Create_Context } from '../../../../context-api/authntication-context';
+import { UpdateReguster_Create_Context } from '../../../../context-api/Update_Reguster_Context';
+import { useNavigate } from 'react-router-dom';
+import Input_Card from './2-InputCard/Input_Card';
    
 
-function Signup_Section_Have() {
+function Signup_Section_Have({DataWllUse}) {
 
   const [statusEmail,setStatusEmail]=useState(false);
-  const [ImageUpload,setImageUpload]=useState(false)
+  const [ImageUpload,setImageUpload]=useState(false);
+  const loginContext=useContext(Login_Create_Context);
+  const RegusterContext=useContext(UpdateReguster_Create_Context);
+  const UpdateReguster=useContext(UpdateReguster_Create_Context);
+  const Navi=useNavigate();
 
 
-    //Get All Data From The Form Reguster
+
+
+
+
+    //Use For Update And For Reguster Section For Two Depend On Type
     const Get_AllData=(data)=>{
-        
-      //Add Reguster Id Number
-      data.regusterid=uuid();
-      if(ImageUpload!==false){data.Image=ImageUpload?.url}
-      console.log(data)
-      data.country=data.country.split("###")[0]
-
-
-      axios.post(`${process.env.REACT_APP_API}signup`,data).
-      then((x)=>{
-        if(x.data.status=="Email Is ok"){
-          setStatusEmail("Email Ok Now Log In")
-        }else if(x.data.status=="Email Is Taken"){
-          setStatusEmail("Wmail Is Taken")
-        }
-    })
-
-}  
+      PostData_Reguster(
+        DataWllUse.TypeSelect,data,
+        ImageUpload,setStatusEmail,loginContext,
+        RegusterContext,Navi)
+    }  
 
 
 
+
+    // initial Value
+    const initialValues=DataWllUse.initialValues;
+    //you schema style validation 
+    const SignupSchema = DataWllUse.SignupSchema
 
 
   return (
     <>
           <motion.div className='signin-container' initial={{x:"-100vw"}} animate={{x:"0"}} transition={{duration:.5}}>
               <div className='signin-container-section'>
-                <h3>Sign Up</h3>
+                <h3>{DataWllUse.NameType}</h3>
                           <Formik
                                     initialValues={initialValues}
                                     validationSchema={SignupSchema}
@@ -58,19 +61,23 @@ function Signup_Section_Have() {
                                     >
                                     {({ errors, touched }) => (
                                         <Form>
-                                              {DatauseSign.map(({name,icon,type,placeholder},i)=>(
-                                                <>
-                                                    <ul className='container-input' key={i}>
-                                                        <li>{icon}</li>
-                                                        <li><Field type={type} name={name}  placeholder={placeholder}/></li>
-                                                    </ul> 
-                                                    <p>{errors[name] && touched[name] ? <div className='error-section'>{errors[name]}</div> : null}</p>
-                                                </>                                       
+
+                                              {DataWllUse.DataInput.map((dataUsing,i)=>(
+                                                <Input_Card dataUsing={dataUsing} touched={touched} errors={errors} key={i}/>
                                               ))}
-                                              <Select_Currency />
-                                              <UploadPhoto GetPhoto={(data)=>{setImageUpload(data)}}/>
+
+                                              {DataWllUse.NameType!=="Sign in"?
+                                                  <>
+                                                    <Select_Currency />
+                                                    <UploadPhoto GetPhoto={(data)=>{setImageUpload(data)}}/>
+                                                  </>
+                                                :<>
+                                                    <SignupButton UpdateReguster={UpdateReguster}/>
+                                                </>}
+
                                               <SignUp_Notificarion statusEmail={statusEmail}/>
-                                              
+
+
                                         </Form>
                                     )}
                          </Formik>      
@@ -82,10 +89,6 @@ function Signup_Section_Have() {
 
 export default Signup_Section_Have;
 
-// initial Value
-const initialValues=InitialData;
-//you schema style validation 
-const SignupSchema = SchemaSignup
 
 
 

@@ -1,0 +1,17 @@
+@use "../.././../../../main-style/style.scss";
+.cintainer-signup-button-section{
+    margin-top: 35px;
+    h4 {
+        display: flex; align-items: center; justify-content: center; padding: 10px; width: 170px;
+        cursor: pointer; background-color: rgba(192, 192, 192, 0.199); border-radius: 5px;
+        margin-left: auto; margin-right: auto;
+    }
+    ul {
+        display: flex; padding: 5px; justify-content: center;
+            li{
+                cursor: pointer; font-size: 1.4em;
+                padding: 5px;
+            }
+        
+    }
+}
