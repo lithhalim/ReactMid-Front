@@ -2,7 +2,7 @@
 Projected creation of a registration process with the view of all users
 
 ## All Links 
- - [Live Utl Linke](https://storied-pixie-09510c.netlify.app/)
+ - [Live Url Prese Hree...........](https://storied-pixie-09510c.netlify.app/)
  - [FrontEnd Github](https://github.com/lithhalim/ReactMid-Front)
  - [BackEnd  Github](https://github.com/lithhalim/ReactMid-Back)
 

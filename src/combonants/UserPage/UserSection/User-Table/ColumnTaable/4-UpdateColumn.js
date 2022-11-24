@@ -15,14 +15,14 @@ function UpdateColumn({params}) {
     const Navi=useNavigate()
 
     const UpdateButton=(event)=>{
-        UpdateReguster_Create_Context_Section.setTypeSelect("update")
-        RegusterContext.setUpdateRegusterId(event.currentTarget.getAttribute("datatype"));
-        Navi("/")
         
-        // if(Login_Create_ContextAuth.AllUserDaata.role=="admin"){
-        // }else{
-        //     Alert_Create_Context_Section.setRunAlert({Value:"Just Admin Can Do That",image:alertImage})
-        // }  
+        if(Login_Create_ContextAuth.AllUserDaata.role=="admin"){
+            UpdateReguster_Create_Context_Section.setTypeSelect("update")
+            RegusterContext.setUpdateRegusterId(event.currentTarget.getAttribute("datatype"));
+            Navi("/")    
+        }else{
+            Alert_Create_Context_Section.setRunAlert({Value:"Just Admin Can Do That",image:alertImage})
+        }  
     }
 
   return (
